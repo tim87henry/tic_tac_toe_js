@@ -1,0 +1,29 @@
+#header {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 5%;
+}
+
+#gameboard {
+    display:flex;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    background: gray;
+    height: 399px;
+    width: 600px;
+    margin: 5% auto;
+}
+
+.gameSquare {
+    border: solid 1px;
+    height: 131px;
+    line-height: 131px;
+    width: 198px;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.gameSquare:hover {
+    background: palevioletred;
+}
