@@ -1,6 +1,6 @@
 var gameBoard=document.querySelector("#gameboard");
-gameBoard.style.background="pink";
 let gameSquare=[];
+let gameActive=true;
 
 const Board = (() => {
     const display = () => {
@@ -16,9 +16,11 @@ const Board = (() => {
 
 const User = (num) => {
     let mark = (num===1)? "X" : "O"; 
+    
     const drawMark = (squareId) => {
         document.querySelector("#"+squareId).innerHTML=mark;
     }
+
     const isGameOver = () => {
         let values=[];
         for (i=0;i<9;i++) {
@@ -34,25 +36,43 @@ const User = (num) => {
          || (values[2]===mark && values[4]===mark && values[6]===mark)) {
             return true;
         }
-        console.log(values);
         return false;
     }
-    return {drawMark,isGameOver};
+
+    const isGameTie = () => {
+        let values=[];
+        for (i=0;i<9;i++) {
+            values[i]=document.querySelector("#square"+i).innerHTML;
+        }
+        const isNotEmpty = (val) => val!="";
+        if (values.every(isNotEmpty)) {
+            return true;
+        }
+        return false;
+    }
+
+    return {drawMark, num, isGameOver, isGameTie};
 };
 
 const gamePlay = (() => {
     const user1=User(1);
     const user2=User(2);
     let currentUser=user1;
+    var result=document.querySelector("#result");
     gameBoard.addEventListener("click",function(e) {
-        console.log(e.target.id);
-        let squareId=e.target.id;
-        if (document.querySelector("#"+squareId).innerHTML!="X" && document.querySelector("#"+squareId).innerHTML!="O") {
-            currentUser.drawMark(squareId);
-            if (currentUser.isGameOver()==true) {
-                console.log("User "+currentUser+" won");
+        if (gameActive) {
+            let squareId=e.target.id;
+            if (document.querySelector("#"+squareId).innerHTML!="X" && document.querySelector("#"+squareId).innerHTML!="O") {
+                currentUser.drawMark(squareId);
+                if (currentUser.isGameOver()==true) {
+                    result.innerHTML="User "+currentUser.num+" won";
+                    gameActive=false;
+                } else if (currentUser.isGameTie()==true) {
+                    result.innerHTML="Tie Game";
+                    gameActive=false;
+                }
+                currentUser = (currentUser===user1)? user2 : user1;
             }
-            currentUser = (currentUser===user1)? user2 : user1;
         }
     })
 })();

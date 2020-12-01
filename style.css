@@ -5,6 +5,7 @@
 }
 
 #gameboard {
+    background: pink;
     display:flex;
     flex-wrap: wrap;
     margin-top: 5%;
@@ -15,6 +16,7 @@
 }
 
 .gameSquare {
+    background: pink;
     border: solid 1px;
     height: 131px;
     line-height: 131px;
@@ -26,4 +28,10 @@
 
 .gameSquare:hover {
     background: palevioletred;
+}
+
+#result {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 5%;
 }
