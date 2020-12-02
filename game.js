@@ -1,9 +1,10 @@
 var gameBoard=document.querySelector("#gameboard");
 let gameSquare=[];
-let gameActive=true;
+let gameActive=false;
 
 const Board = (() => {
     const display = () => {
+        gameBoard.innerHTML="";
         for (i=0;i<9;i++) {
             gameSquare[i]=document.createElement("div");
             gameSquare[i].className="gameSquare";
@@ -14,7 +15,7 @@ const Board = (() => {
     return {display};
 })();
 
-const User = (num) => {
+const User = (num,name) => {
     let mark = (num===1)? "X" : "O"; 
     
     const drawMark = (squareId) => {
@@ -51,21 +52,31 @@ const User = (num) => {
         return false;
     }
 
-    return {drawMark, num, isGameOver, isGameTie};
+    return {drawMark, name, isGameOver, isGameTie};
 };
 
 const gamePlay = (() => {
-    const user1=User(1);
-    const user2=User(2);
-    let currentUser=user1;
+    let currentUser;
+    let user1;
+    let user2;
     var result=document.querySelector("#result");
+    var startGame=document.querySelector("#start");
+    startGame.addEventListener("click",function(e) {
+        Board.display();
+        let player1=document.getElementById("player1").value;
+        let player2=document.getElementById("player2").value;
+        user1=User(1,player1);
+        user2=User(2,player2);
+        currentUser=user1;
+        gameActive=true;
+    });
     gameBoard.addEventListener("click",function(e) {
         if (gameActive) {
             let squareId=e.target.id;
             if (document.querySelector("#"+squareId).innerHTML!="X" && document.querySelector("#"+squareId).innerHTML!="O") {
                 currentUser.drawMark(squareId);
                 if (currentUser.isGameOver()==true) {
-                    result.innerHTML="User "+currentUser.num+" won";
+                    result.innerHTML=currentUser.name+" won";
                     gameActive=false;
                 } else if (currentUser.isGameTie()==true) {
                     result.innerHTML="Tie Game";

@@ -1,33 +1,77 @@
+* { 
+    margin:0;
+    padding:0; 
+    box-sizing:border-box; 
+}
+
+body {
+    background: rgb(70, 91, 126);
+    color: white;
+}
+
 #header {
     font-size: 20px;
     text-align: center;
-    margin-top: 5%;
+    margin-top: 3%;
+}
+
+#players {
+    margin-bottom: 3%;
+}
+
+#players ul{
+    padding-right: 20%;
+    padding-left: 20%;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    margin: 30px;
+}
+
+.player_name {
+    border-radius: 20px;
+    margin-left: 10px;
+    height: 30px;
+    padding-left: 10px;
+    border: 0;
+    background: lightblue;
+}
+
+.player_name:hover {
+    box-shadow: 0 1px 3px 1px rgba(0,0,0,0.19);
+}
+
+#start {
+    height: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: silver;
+    border: 0;
 }
 
 #gameboard {
-    background: pink;
+    background: rgb(236,213,172);
     display:flex;
     flex-wrap: wrap;
-    margin-top: 5%;
-    background: gray;
-    height: 399px;
-    width: 600px;
-    margin: 5% auto;
+    height: 345px;
+    width: 495px;
+    margin: auto;
 }
 
 .gameSquare {
-    background: pink;
+    background: rgb(236,213,172);
+    color: navy;
     border: solid 1px;
-    height: 131px;
-    line-height: 131px;
-    width: 198px;
+    height: 115px;
+    line-height: 115px;
+    width: 165px;
     text-align: center;
     font-size: 30px;
     cursor: pointer;
 }
 
 .gameSquare:hover {
-    background: palevioletred;
+    background: rgb(231, 180, 93);
 }
 
 #result {
