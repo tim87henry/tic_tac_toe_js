@@ -59,7 +59,6 @@ const User = (num,name,isAI) => {
 
     const makeMove = () => {
         if (isAI && gameActive) {
-            console.log("AI taking over")
             let values=[];
             for (i=0;i<9;i++) {
                 values[i]=document.querySelector("#square"+i).innerHTML;
@@ -68,7 +67,6 @@ const User = (num,name,isAI) => {
             while (values[randomSquare]!='') {
                 randomSquare=Math.floor(Math.random()*9)
             }
-            console.log("AI brain says "+randomSquare+" for player "+num)
             drawMark("square"+randomSquare);
             if (currentUser.isGameOver()==true) {
                 result.innerHTML=currentUser.name+" won";
@@ -81,7 +79,6 @@ const User = (num,name,isAI) => {
             currentUser.makeMove();
         } else {
             gameBoard.addEventListener("click",function(e) {
-            console.log("onclick board")
             if (gameActive) {
                 let squareId=e.target.id;
                 if (document.querySelector("#"+squareId).innerHTML!="X" && document.querySelector("#"+squareId).innerHTML!="O") {
@@ -120,6 +117,7 @@ const gamePlay = (() => {
         ai2.style.background = (p2_ai===false)? ai_button_bg:ai_button_bg_clicked;
     });
     startGame.addEventListener("click",function(e) {
+        result.innerHTML="";
         Board.display();
         let player1= (p1_ai)? "AI Player 1":document.getElementById("player1").value;
         let player2= (p2_ai)? "AI Player 2":document.getElementById("player2").value;
